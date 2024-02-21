@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Builder
 public class ClubDto {
@@ -20,4 +22,5 @@ public class ClubDto {
     private String content;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private List<EventDto> events;
 }

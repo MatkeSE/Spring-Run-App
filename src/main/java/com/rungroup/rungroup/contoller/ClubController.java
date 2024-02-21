@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -77,13 +78,13 @@ public class ClubController {
 
     @PostMapping("/clubs/{clubId}/edit")
     public String updateClub(@PathVariable("clubId") Long clubId,
-                             @ModelAttribute("club") ClubDto club
-                             /*BindingResult result*/, Model model) {
-       /* if(result.hasErrors()) {
+                             @Validated @ModelAttribute("club") ClubDto club,
+                             BindingResult result, Model model) {
+        if(result.hasErrors()) {
             model.addAttribute("club", club);
             return "clubs-edit";
         }
-        */
+
         club.setId(clubId);
         clubService.updateClub(club);
         return "redirect:/clubs";
