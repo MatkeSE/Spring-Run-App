@@ -1,5 +1,6 @@
 package com.rungroup.rungroup.security;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,48 +16,49 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityCongif {
+public class SecurityConfig {
+
 //    private CustomUserDetailsService userDetailsService;
 //
 //    @Autowired
 //    public SecurityConfig(CustomUserDetailsService userDetailsService) {
 //        this.userDetailsService = userDetailsService;
 //    }
-//
-//    @Bean
+
+//        @Bean
 //    public static PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf(AbstractHttpConfigurer::disable);
-//        http.cors(AbstractHttpConfigurer::disable);
-//
-//
-//
-//        return http
-//                .authorizeHttpRequests(request -> request
-//                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/clubs").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/css/**").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/js/**").permitAll()
-//                        .anyRequest()
-//                        .authenticated()
-//                )
-//                .formLogin(form -> form
-//                        .loginPage("/login")
-//                        .defaultSuccessUrl("/clubs")
-//                        .loginProcessingUrl("/login")
-//                        .failureUrl("/login?error=true")
-//                        .permitAll()
-//                ).logout(
-//                        logout -> logout
-//                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-//                )
-//                .build();
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(AbstractHttpConfigurer::disable);
+
+
+
+        return http
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/clubs").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/css/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/js/**").permitAll()
+                        .anyRequest()
+                        .authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/clubs")
+                        .loginProcessingUrl("/login")
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                ).logout(
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                )
+                .build();
+    }
 //    public void configure(AuthenticationManagerBuilder builder) throws Exception {
 //        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 //    }

@@ -1,5 +1,6 @@
 package com.rungroup.rungroup.contoller;
 
+
 import com.rungroup.rungroup.dto.RegistrationDto;
 import com.rungroup.rungroup.models.UserEntity;
 import com.rungroup.rungroup.service.UserService;
@@ -11,12 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-
 @Controller
-public class AuthContoller {
+public class AuthController {
     private UserService userService;
 
-    public AuthContoller(UserService userService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 
@@ -36,13 +36,11 @@ public class AuthContoller {
     public String register(@Valid @ModelAttribute("user")RegistrationDto user,
                            BindingResult result, Model model) {
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
-        if(existingUserEmail != null && existingUserEmail.getEmail() != null
-                && !existingUserEmail.getEmail().isEmpty()) {
+        if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
             return "redirect:/register?fail";
         }
         UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
-        if(existingUserUsername != null && existingUserUsername.getUsername() != null
-                && !existingUserUsername.getUsername().isEmpty()) {
+        if(existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
             return "redirect:/register?fail";
         }
         if(result.hasErrors()) {

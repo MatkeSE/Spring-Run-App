@@ -6,6 +6,8 @@ import com.rungroup.rungroup.models.UserEntity;
 import com.rungroup.rungroup.repository.RoleRepository;
 import com.rungroup.rungroup.repository.UserRepository;
 import com.rungroup.rungroup.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -14,11 +16,15 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+//    private PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(RoleRepository roleRepository, UserRepository userRepository) {
-        this.roleRepository = roleRepository;
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+//        this.passwordEncoder = passwordEncoder;
     }
+
 
     @Override
     public void saveUser(RegistrationDto registrationDto) {
